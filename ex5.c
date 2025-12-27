@@ -1,6 +1,6 @@
 /***********
- ID:
- NAME:
+ ID:329218416
+ NAME:Naor Biton
 ***********/
 
 #include <stdio.h>
@@ -124,4 +124,35 @@ int main() {
         }
     } while (choice != 4);
     return 0;
+}
+
+/// Add function 
+void addShow() {
+
+}
+
+void addSeason() {
+
+
+}
+void addEpisode() {
+
+}
+
+void deleteShow() {
+
+}
+void deleteSeason() {
+
+}
+void deleteEpisode() {
+
+}
+void printEpisode() {
+}
+
+void printShow() {
+}
+
+void printArray() {
 }
