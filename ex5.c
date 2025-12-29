@@ -7,6 +7,10 @@
 #include <stdlib.h>
 #include <string.h>
 
+/// custom
+#define GOBACKONECELL -1
+#define INVALIDPOSTION -1
+
 typedef struct Episode
 {
     char *name;
@@ -26,6 +30,14 @@ typedef struct TVShow
     char *name;
     Season *seasons;
 } TVShow;
+
+// custom struct
+
+typedef struct Pos
+{
+    int row;
+    int column;
+} Pos;
 
 TVShow ***database = NULL;
 int dbSize = 0;
@@ -61,8 +73,11 @@ void printShow();
 void printArray();
 
 // custom
-TVShow *findShowPostion(TVShow *show);
-void insertShow(TVShow *show, TVShow *beforeShow);
+Pos findShowPostion(TVShow *show);
+void insertShow(TVShow *show, Pos posBefore);
+
+Pos getCellNewPos(Pos currentPos, int move);
+void swapTwoCells(Pos cell1, Pos cell2);
 
 void addMenu()
 {
@@ -191,7 +206,7 @@ void addShow()
     newShow->name = showName;
     newShow->seasons = NULL;
 
-    TVShow *posToInsert = findShowPostion(newShow);
+    Pos posToInsert = findShowPostion(newShow);
     insertShow(newShow, posToInsert);
 }
 
@@ -236,6 +251,7 @@ void printArray()
         }
         printf("\n");
     }
+    printf("\n");
 }
 
 // get string
@@ -289,20 +305,8 @@ void expandDB()
         database[0] = (TVShow **)calloc(dbSize, (sizeof(TVShow *)));
         return;
     }
-
-    int currentAmountOfShows = 0;
-    for (int i = 0; i < dbSize; i++)
-    {
-        for (int j = 0; j < dbSize; j++)
-        {
-            if (database[i][j] != NULL)
-            {
-                currentAmountOfShows++;
-            }
-        }
-    }
     // if increseing the size of array is needed
-    if ((dbSize * dbSize) == currentAmountOfShows)
+    if (database[dbSize-1][dbSize-1]!=NULL)
     {
         dbSize++;
         for (int i = 0; i < (dbSize - 1); i++)
@@ -315,14 +319,13 @@ void expandDB()
         database[dbSize - 1] = (TVShow **)calloc(dbSize, (sizeof(TVShow *))); // intialize the new cell with a empty array
     }
 
-    //need to realocate the old array 
-
+    // need to realocate the old array
 
     return;
 }
 
 // return the position of the show in the database where the new show should be inserted
-TVShow *findShowPostion(TVShow *show)
+Pos findShowPostion(TVShow *show)
 {
     for (int i = 0; i < dbSize; i++)
     {
@@ -330,49 +333,100 @@ TVShow *findShowPostion(TVShow *show)
         {
             if (database[i][j] == NULL)
             {
-                return database[i][j];
+                return (Pos){i, j};
             }
             if (strcmp(database[i][j]->name, show->name) > 0)
             {
-                return database[i][j];
+
+                return (Pos){i, j};
             }
         }
     }
-    return NULL;
+    return (Pos){INVALIDPOSTION, INVALIDPOSTION};
 }
 
-void insertShow(TVShow *show, TVShow *beforeShow)
+/// need to change
+void insertShow(TVShow *show, Pos posBefore)
 {
-
-    TVShow *temp = show;
-    TVShow *temp2;
-    int found = 0;
-    for (int i = 0; i < dbSize; i++)
+    // if the last cell isnt null it means the db is to small
+    if (database[dbSize - 1][dbSize - 1] != NULL)
     {
-        for (int j = 0; j < dbSize; j++)
+        expandDB();
+    }
+
+     Pos posOfOneCellBehindm,currentPos;
+    for (int i = dbSize-1; 0 <=i ; i--)
+    {
+        for (int j = dbSize-1; 0 <=j ; j--)
         {
             printArray();
-            if (database[i][j] == NULL)
+            currentPos = (Pos){i, j};
+            if (condition)
             {
-                database[i][j] = temp;
+                posOfOneCellBehind = getCellNewPos(currentPos, GOBACKONECELL);
+
+            }
+            
+            swapTwoCells(currentPos,posOfOneCellBehind);
+            if (posBefore.row == j && posBefore.column == i)
+            {
+                database[j][i] = show;
                 return;
             }
-
-            if (found == 1)
-            {
-                temp2 = database[i][j];
-                database[i][j] = temp;
-                temp2 = temp;
-            }
-            if (database[i][j] == beforeShow && found == 0)
-            {
-                found = 1;
-                temp = beforeShow;
-                database[i][j] = show;
-            }
+           
         }
     }
     return;
 }
 
 void freeAll();
+
+Pos getCellNewPos(Pos currentPos, int move)
+{
+    // Prevent Division by Zero
+    if (dbSize <= 0)
+    {
+        return (Pos){INVALIDPOSTION, INVALIDPOSTION};
+    }
+
+    // Validate Input Position
+    if (currentPos.row < 0 || currentPos.row >= dbSize ||
+        currentPos.column < 0 || currentPos.column >= dbSize)
+    {
+        return (Pos){INVALIDPOSTION, INVALIDPOSTION};
+    }
+
+    // Convert the 2d array to 1d array
+    int posLineIndex = currentPos.row * dbSize + currentPos.column;
+
+    // Apply Move
+    int newLineIndex = posLineIndex + move;
+
+    // Bounds Checking
+    if (newLineIndex < 0 )
+    {
+        return (Pos){0, 0};
+    }
+    
+
+    if (newLineIndex >= (dbSize * dbSize))
+    {
+        return (Pos){INVALIDPOSTION, INVALIDPOSTION};
+    }
+
+    // 3. Convert back to 2D array
+    Pos newPos;
+    newPos.row = newLineIndex / dbSize;
+    newPos.column = newLineIndex % dbSize;
+
+    return newPos;
+}
+
+void swapTwoCells(Pos cell1, Pos cell2)
+{
+
+    TVShow *temp = database[cell1.row][cell1.column];
+    database[cell1.row][cell1.column] = database[cell2.row][cell2.column];
+    database[cell2.row][cell2.column] = temp;
+    return;
+}
