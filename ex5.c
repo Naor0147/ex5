@@ -9,6 +9,7 @@
 
 /// custom
 #define GOBACKONECELL -1
+#define GOTONEXTCELL 1
 #define INVALIDPOSTION -1
 
 typedef struct Episode
@@ -77,7 +78,9 @@ Pos findShowPostion(TVShow *show);
 void insertShow(TVShow *show, Pos posBefore);
 
 Pos getCellNewPos(Pos currentPos, int move);
+void shiftCellsRightFrom(Pos *lastPos);
 void swapTwoCells(Pos cell1, Pos cell2);
+void shiftCellsLeftFrom(Pos *lastPos);
 
 void addMenu()
 {
@@ -187,6 +190,7 @@ int main()
 /// Add function
 void addShow()
 {
+    printf("Enter the name of the show:\n");
     char *showName = getString();
 
     // is there already a show with same name
@@ -242,16 +246,16 @@ void printArray()
         {
             if (database[i][j] != NULL)
             {
-                printf("[%s]", database[i][j]->name);
+                printf("[%s] ", database[i][j]->name);
             }
             else
             {
-                printf("[NULL]");
+                printf("[NULL] ");
             }
         }
         printf("\n");
     }
-    printf("\n");
+
 }
 
 // get string
@@ -306,7 +310,7 @@ void expandDB()
         return;
     }
     // if increseing the size of array is needed
-    if (database[dbSize-1][dbSize-1]!=NULL)
+    if (database[dbSize - 1][dbSize - 1] != NULL)
     {
         dbSize++;
         for (int i = 0; i < (dbSize - 1); i++)
@@ -317,6 +321,18 @@ void expandDB()
 
         database = realloc(database, dbSize * sizeof(TVShow **));             // update size of main array
         database[dbSize - 1] = (TVShow **)calloc(dbSize, (sizeof(TVShow *))); // intialize the new cell with a empty array
+
+        for (int i = 0; i < dbSize; i++)
+        {
+            for (int j = 0; j < dbSize; j++)
+            {
+                if (database[j][i] == NULL)
+                {
+                    Pos curentPos = (Pos){i, j};
+                    shiftCellsLeftFrom(&curentPos);//have problem 
+                }
+            }
+        }
     }
 
     // need to realocate the old array
@@ -354,29 +370,45 @@ void insertShow(TVShow *show, Pos posBefore)
         expandDB();
     }
 
-     Pos posOfOneCellBehindm,currentPos;
-    for (int i = dbSize-1; 0 <=i ; i--)
-    {
-        for (int j = dbSize-1; 0 <=j ; j--)
-        {
-            printArray();
-            currentPos = (Pos){i, j};
-            if (condition)
-            {
-                posOfOneCellBehind = getCellNewPos(currentPos, GOBACKONECELL);
+    // printf("\nlet enter : %s  pos [row:%d , coulm:%d]  \n", show->name, posBefore.row, posBefore.column);
+    shiftCellsRightFrom(&posBefore);
+    database[posBefore.row][posBefore.column] = show;
+    return;
+}
 
-            }
-            
-            swapTwoCells(currentPos,posOfOneCellBehind);
-            if (posBefore.row == j && posBefore.column == i)
+void shiftCellsRightFrom(Pos *lastPos)
+{
+    Pos posOfOneCellBehind, currentPos;
+    for (int i = dbSize - 1; 0 <= i; i--)
+    {
+        for (int j = dbSize - 1; 0 <= j; j--)
+        {
+            if (lastPos->row == i && lastPos->column == j)
             {
-                database[j][i] = show;
                 return;
             }
-           
+            currentPos = (Pos){i, j};
+            posOfOneCellBehind = getCellNewPos(currentPos, GOBACKONECELL);
+            swapTwoCells(currentPos, posOfOneCellBehind);
         }
     }
-    return;
+}
+void shiftCellsLeftFrom(Pos *lastPos)
+{
+    Pos posOfOneCellBehind, currentPos;
+    for (int i = lastPos->row; i <= dbSize - 1; i++)
+    {
+        for (int j = 0; j <= dbSize - 1; j++)
+        {
+            if (i == lastPos->row && lastPos->column > j)
+            {
+                continue;
+            }
+            currentPos = (Pos){i, j};
+            posOfOneCellBehind = getCellNewPos(currentPos, GOTONEXTCELL);
+            swapTwoCells(currentPos, posOfOneCellBehind);
+        }
+    }
 }
 
 void freeAll();
@@ -403,11 +435,10 @@ Pos getCellNewPos(Pos currentPos, int move)
     int newLineIndex = posLineIndex + move;
 
     // Bounds Checking
-    if (newLineIndex < 0 )
+    if (newLineIndex < 0)
     {
-        return (Pos){0, 0};
+        return (Pos){0, 0}; // return first cell
     }
-    
 
     if (newLineIndex >= (dbSize * dbSize))
     {
@@ -424,9 +455,17 @@ Pos getCellNewPos(Pos currentPos, int move)
 
 void swapTwoCells(Pos cell1, Pos cell2)
 {
+    // Validate Input Positions
+    if (cell1.row == INVALIDPOSTION || cell2.row == INVALIDPOSTION)
+    {
+        return;
+    }
 
+    // Swap the elements
     TVShow *temp = database[cell1.row][cell1.column];
     database[cell1.row][cell1.column] = database[cell2.row][cell2.column];
     database[cell2.row][cell2.column] = temp;
+    // printArray();
+
     return;
 }
