@@ -75,22 +75,22 @@ void printArray();
 
 // custom
 
-//locate
+// locate
 Pos findShowPostion(TVShow *show);
 Season *doesItExsistSeason(TVShow *show, char *name);
 
-//insert
+// insert
 void insertShow(TVShow *show, Pos posBefore);
 void insertSeaon(TVShow *show, Season *season, int numberOfTheSeason);
 
 Pos getCellNewPos(Pos currentPos, int move);
 
-//shiftCells
+// shiftCells
 void shiftCellsRightFrom(Pos *lastPos);
 void swapTwoCells(Pos cell1, Pos cell2);
 void shiftCellsLeftFrom(Pos *lastPos);
 
-//clean buffer
+// clean buffer
 void clearBuffer();
 
 void addMenu()
@@ -359,9 +359,24 @@ void printEpisode()
 
 void printShow()
 {
-    
+    printf("Enter the name of the show:\n");
+    char *showName = getString();
+    // is there already a show with same name
+    TVShow *show = findShow(showName);
+    if (show != NULL)
+    {
 
-
+        Season *tempSeason = show->seasons;
+        int index = 0;
+        while (tempSeason != NULL)
+        {
+            printf("\tSeason %d: %s\n", index, tempSeason->name);
+            index++;
+            tempSeason = tempSeason->next;
+        }
+    }
+    free(showName);
+    return;
 }
 
 void printArray()
