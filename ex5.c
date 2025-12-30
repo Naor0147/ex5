@@ -224,7 +224,9 @@ void addSeason()
         // check if seasons array exsists
         if (show->seasons == NULL)
         {
-            Season *firstSeaon=(Season*)malloc(sizeof(Season));
+            Season *firstSeaon=(Season *)malloc(sizeof(Season));
+            firstSeaon=(Season*){showName,NULL,NULL};
+            show->seasons=firstSeaon;
         }
 
         return;
