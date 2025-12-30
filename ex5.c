@@ -282,21 +282,21 @@ void insertSeaon(TVShow *show, Season *newSeason, int index)
     return;
 }
 //0 if doesn't exsists 1 if exsists
-int doesItExsistSeason(TVShow *show, char *name){
+Season *doesItExsistSeason(TVShow *show, char *name){
     Season *temp = show->seasons;
     if (temp == NULL )
     {
-        return 0;
+        return NULL;
     }
     while (temp!=NULL)
     {
         if (strcmp( temp->name,name)==0)
         {
-            return 1;
+            return temp;
         }
         temp =temp->next;
     }   
-    return 0;
+    return NULL;
     
 
 }
