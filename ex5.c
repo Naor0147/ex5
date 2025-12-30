@@ -258,7 +258,7 @@ void insertSeaon(TVShow *show, Season *season, int numberOfTheSeason)
 
     int count = 0;
 
-    while (tempBefore != NULL && count < (numberOfTheSeason-1))
+    while (tempBefore->next != NULL && count < (numberOfTheSeason-1))
     {
         tempBefore = tempBefore->next;
         count++;
