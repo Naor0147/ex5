@@ -225,7 +225,7 @@ void addSeason()
         printf("Enter the name of the season:\n");
         char *seasonName = getString();
         // need to check if the seaon already exsists
-        if (doesItExsistSeason(show,seasonName)==0)
+        if (doesItExsistSeason(show,seasonName)!=NULL)
         {
             printf("Season already exists.\n");
             free(showName);
