@@ -225,7 +225,7 @@ void addSeason()
         printf("Enter the name of the season:\n");
         char *seasonName = getString();
         // need to check if the seaon already exsists
-        if (doesItExsistSeason(show,seasonName)!=NULL)
+        if (doesItExsistSeason(show, seasonName) != NULL)
         {
             printf("Season already exists.\n");
             free(showName);
@@ -238,7 +238,7 @@ void addSeason()
         int numberOfTheSeason;
         scanf("%d", &numberOfTheSeason);
 
-        //if left over char left in the buffer 
+        // if left over char left in the buffer
         clearBuffer();
 
         Season *newSeason = (Season *)malloc(sizeof(Season));
@@ -281,31 +281,28 @@ void insertSeaon(TVShow *show, Season *newSeason, int index)
 
     return;
 }
-//0 if doesn't exsists 1 if exsists
-Season *doesItExsistSeason(TVShow *show, char *name){
+// 0 if doesn't exsists 1 if exsists
+Season *doesItExsistSeason(TVShow *show, char *name)
+{
     Season *temp = show->seasons;
-    if (temp == NULL )
+    if (temp == NULL)
     {
         return NULL;
     }
-    while (temp!=NULL)
+    while (temp != NULL)
     {
-        if (strcmp( temp->name,name)==0)
+        if (strcmp(temp->name, name) == 0)
         {
             return temp;
         }
-        temp =temp->next;
-    }   
+        temp = temp->next;
+    }
     return NULL;
-    
-
 }
 
-int compareText(char *text1,char *text2){
-
+int compareText(char *text1, char *text2)
+{
 }
-
-
 
 void addEpisode()
 {
@@ -587,15 +584,17 @@ void swapTwoCells(Pos cell1, Pos cell2)
     return;
 }
 
-
-void clearBuffer() {
+void clearBuffer()
+{
     int leftOverChar;
 
-    while (1) {
+    while (1)
+    {
         leftOverChar = getchar();
 
         // If we hit a newline or the end of the input stops the program
-        if (leftOverChar == '\n' || leftOverChar == EOF) {
+        if (leftOverChar == '\n' || leftOverChar == EOF)
+        {
             return;
         }
     }
