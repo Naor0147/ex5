@@ -223,7 +223,12 @@ void addSeason()
     {
         printf("Enter the name of the show:\n");
         char *SeasonName = getString();
-        
+        //need to check if the seaon already exsists 
+
+        //need to get number of seaon
+        printf("Enter the name of the show:\n");
+        int numberOfTheSeason=scanf("%d");
+
         // check if seasons array exsists
         if (show->seasons == NULL)
         {
