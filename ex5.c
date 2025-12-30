@@ -221,6 +221,11 @@ void addSeason()
     TVShow *show = findShow(showName);
     if (show != NULL)
     {
+        // check if seasons array exsists
+        if (show->seasons == NULL)
+        {
+            Season *firstSeaon=(Season*)malloc(sizeof(Season));
+        }
 
         return;
     }
