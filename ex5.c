@@ -76,6 +76,7 @@ void printArray();
 // custom
 Pos findShowPostion(TVShow *show);
 void insertShow(TVShow *show, Pos posBefore);
+void insertSeaon(TVShow *show, Season *season, int numberOfTheSeason);
 
 Pos getCellNewPos(Pos currentPos, int move);
 void shiftCellsRightFrom(Pos *lastPos);
@@ -221,14 +222,24 @@ void addSeason()
     TVShow *show = findShow(showName);
     if (show != NULL)
     {
-        printf("Enter the name of the show:\n");
+        printf("Enter the name of the season:\n");
         char *seasonName = getString();
         // need to check if the seaon already exsists
+        if (doesItExsistSeason(show,seasonName)==0)
+        {
+            /* code */
+        }
+        
+
+
 
         // need to get number of seaon
-        printf("Enter the name of the show:\n");
+        printf("Enter the position:\n");
         int numberOfTheSeason;
         scanf("%d", &numberOfTheSeason);
+
+        //if left over char left in the buffer 
+        clearBuffer();
 
         Season *newSeason = (Season *)malloc(sizeof(Season));
         *newSeason = (Season){seasonName, NULL, NULL};
@@ -245,33 +256,85 @@ void addSeason()
     }
 }
 
-void insertSeaon(TVShow *show, Season *season, int numberOfTheSeason)
+void insertSeaon(TVShow *show, Season *newSeason, int index)
 {
-    Season *tempBefore = show->seasons;
-    //handels cases where there isnt season or the new season is the first season
-    if (tempBefore == NULL || numberOfTheSeason == 0)
+    Season *temp = show->seasons;
+    // handels cases where there isnt season or the new season is the first season
+    if (temp == NULL || index == 0)
     {
-        season->next = tempBefore;
-        show->seasons = season;
+        newSeason->next = temp;
+        show->seasons = newSeason;
         return;
     }
 
     int count = 0;
 
-    while (tempBefore->next != NULL && count < (numberOfTheSeason-1))
+    // loop that itreates in the linked list
+    while (temp->next != NULL && count < (index - 1))
     {
-        tempBefore = tempBefore->next;
+        temp = temp->next;
         count++;
     }
 
-    season->next=tempBefore->next;
-    tempBefore->next = season;
+    newSeason->next = temp->next;
+    temp->next = newSeason;
 
     return;
 }
+//0 if doesn't exsists 1 if exsists
+int doesItExsistSeason(TVShow *show, char *name){
+    Season *temp = show->seasons;
+    if (temp == NULL )
+    {
+        return 0;
+    }
+    while (temp!=NULL)
+    {
+        if (strcmp( temp->name,name)==0)
+        {
+            return 1;
+        }
+        temp->next;
+    }   
+    return 0;
+    
+
+}
+
+int compareText(char *text1,char *text2){
+
+}
+
+
 
 void addEpisode()
 {
+}
+
+void insertEpisode(Season *season, Episode *newEpisode, int index)
+{
+    Episode *temp = season->episodes;
+    // handels cases where there isnt epsiode or the new epside is the first
+
+    if (temp == NULL || index == 0)
+    {
+        newEpisode->next = season->episodes;
+        season->episodes = newEpisode;
+        return;
+    }
+
+    // loop that itreates in the linked list
+
+    int count = 0;
+    while (temp->next != NULL && count < (index - 1))
+    {
+        temp = temp->next;
+        count++;
+    }
+
+    // 3. Link
+    newEpisode->next = temp->next;
+    temp->next = newEpisode;
 }
 
 void deleteShow()
@@ -522,4 +585,18 @@ void swapTwoCells(Pos cell1, Pos cell2)
     // printArray();
 
     return;
+}
+
+
+void clearBuffer() {
+    int leftOverChar;
+
+    while (1) {
+        leftOverChar = getchar();
+
+        // If we hit a newline or the end of the input stops the program
+        if (leftOverChar == '\n' || leftOverChar == EOF) {
+            return;
+        }
+    }
 }
