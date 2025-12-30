@@ -260,7 +260,7 @@ void insertSeaon(TVShow *show,Season *season){
     {
         temp=temp->next;
     }
-    *temp=*season;
+    temp->next = season;
     return;
     
 
