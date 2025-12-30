@@ -227,11 +227,11 @@ void addSeason()
         // need to check if the seaon already exsists
         if (doesItExsistSeason(show,seasonName)==0)
         {
-            /* code */
+            printf("Season already exists.\n");
+            free(showName);
+            free(seasonName);
+            return;
         }
-        
-
-
 
         // need to get number of seaon
         printf("Enter the position:\n");
@@ -294,7 +294,7 @@ int doesItExsistSeason(TVShow *show, char *name){
         {
             return 1;
         }
-        temp->next;
+        temp =temp->next;
     }   
     return 0;
     
