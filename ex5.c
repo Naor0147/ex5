@@ -223,17 +223,17 @@ void addSeason()
     {
         printf("Enter the name of the show:\n");
         char *seasonName = getString();
-        //need to check if the seaon already exsists 
+        // need to check if the seaon already exsists
 
-        //need to get number of seaon
+        // need to get number of seaon
         printf("Enter the name of the show:\n");
         int numberOfTheSeason;
-        scanf("%d",&numberOfTheSeason);
+        scanf("%d", &numberOfTheSeason);
 
-        Season *newSeason=(Season *)malloc(sizeof(Season));
-        *newSeason=(Season){seasonName,NULL,NULL};
+        Season *newSeason = (Season *)malloc(sizeof(Season));
+        *newSeason = (Season){seasonName, NULL, NULL};
 
-        insertSeaon(show,newSeason,numberOfTheSeason);
+        insertSeaon(show, newSeason, numberOfTheSeason);
 
         return;
     }
@@ -245,38 +245,30 @@ void addSeason()
     }
 }
 
-void insertSeaon(TVShow *show,Season *season,int numberOfTheSeason){
-    if (show->seasons == NULL)
+void insertSeaon(TVShow *show, Season *season, int numberOfTheSeason)
+{
+    Season *tempBefore = show->seasons;
+    //handels cases where there isnt season or the new season is the first season
+    if (tempBefore == NULL || numberOfTheSeason == 0)
     {
-        show->seasons=season;
+        season->next = tempBefore;
+        show->seasons = season;
         return;
     }
-    Season *tempBefore=show->seasons;
-    if (numberOfTheSeason==0)
-    {
-        season->next=tempBefore;
-        show->seasons=season;
-        return;
-    }
-    int count =0;
-    
 
-    Season *tempAfter=show->seasons->next;
-    while (tempAfter!=NULL&&count<numberOfTheSeason)
+    int count = 0;
+
+    while (tempBefore != NULL && count < (numberOfTheSeason-1))
     {
-        tempBefore=tempAfter;
-        tempAfter=tempAfter->next;
+        tempBefore = tempBefore->next;
         count++;
     }
 
+    season->next=tempBefore->next;
     tempBefore->next = season;
-    season->next = tempAfter;
+
     return;
-    
-
-
 }
-
 
 void addEpisode()
 {
