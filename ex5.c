@@ -222,20 +222,23 @@ void addSeason()
     if (show != NULL)
     {
         printf("Enter the name of the show:\n");
-        char *SeasonName = getString();
+        char *seasonName = getString();
         //need to check if the seaon already exsists 
 
         //need to get number of seaon
         printf("Enter the name of the show:\n");
-        int numberOfTheSeason=scanf("%d");
+        int numberOfTheSeason;
+        scanf("%d",&numberOfTheSeason);
 
+        Season *newSeason=(Season *)malloc(sizeof(Season));
+        *newSeason=(Season){seasonName,numberOfTheSeason,NULL};
         // check if seasons array exsists
         if (show->seasons == NULL)
         {
-            Season *firstSeaon=(Season *)malloc(sizeof(Season));
-            *firstSeaon=(Season){showName,NULL,NULL};
-            show->seasons=firstSeaon;
+            show->seasons=newSeason;
+            return;
         }
+
 
         return;
     }
@@ -245,6 +248,26 @@ void addSeason()
         return;
     }
 }
+
+void insertSeaon(TVShow *show,Season *season){
+    if (show->seasons == NULL)
+    {
+        show->seasons=season;
+        return;
+    }
+    Season *temp=show->seasons;
+    while (temp->next!=NULL)
+    {
+        temp=temp->next;
+    }
+    *temp=*season;
+    return;
+    
+
+
+}
+
+
 void addEpisode()
 {
 }
