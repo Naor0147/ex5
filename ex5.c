@@ -365,7 +365,7 @@ void printShow()
     TVShow *show = findShow(showName);
     if (show != NULL)
     {
-
+        printf("Name: %s\nSeasons:\n",showName);
         Season *tempSeason = show->seasons;
         int index = 0;
         while (tempSeason != NULL)
@@ -375,6 +375,10 @@ void printShow()
             tempSeason = tempSeason->next;
         }
     }
+    else{
+        printf("Show not found.\n");
+    }
+    
     free(showName);
     return;
 }
