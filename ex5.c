@@ -252,14 +252,16 @@ void insertSeaon(TVShow *show,Season *season,int numberOfTheSeason){
         return;
     }
     int count =0;
-    Season *temp=show->seasons;
-    while (temp->next!=NULL&&count<numberOfTheSeason)
+    Season *tempBefore=show->seasons;
+
+    Season *tempAfter=show->seasons;
+    while (tempAfter->next!=NULL&&count<numberOfTheSeason)
     {
-        temp=temp->next;
+        tempAfter=tempAfter->next;
         count++;
     }
-    
-    temp->next = season;
+
+    tempAfter->next = season;
     return;
     
 
