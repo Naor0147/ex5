@@ -216,6 +216,19 @@ void addShow()
 
 void addSeason()
 {
+    printf("Enter the name of the show:\n");
+    char *showName = getString();
+    TVShow *show = findShow(showName);
+    if (show != NULL)
+    {
+
+        return;
+    }
+    else
+    {
+        printf("Show already exists.\n");
+        return;
+    }
 }
 void addEpisode()
 {
@@ -255,7 +268,6 @@ void printArray()
         }
         printf("\n");
     }
-
 }
 
 // get string
@@ -326,10 +338,10 @@ void expandDB()
         {
             for (int j = 0; j < dbSize; j++)
             {
-                if (database[j][i] == NULL)
+                if (database[i][j] == NULL)
                 {
                     Pos curentPos = (Pos){i, j};
-                    shiftCellsLeftFrom(&curentPos);//have problem 
+                    shiftCellsLeftFrom(&curentPos); // have problem
                 }
             }
         }
@@ -383,10 +395,12 @@ void shiftCellsRightFrom(Pos *lastPos)
     {
         for (int j = dbSize - 1; 0 <= j; j--)
         {
-            if (lastPos->row == i && lastPos->column == j)
+            if (lastPos->row == i && lastPos->column == j) // if reached the last cell
             {
                 return;
             }
+
+            // cells we switch
             currentPos = (Pos){i, j};
             posOfOneCellBehind = getCellNewPos(currentPos, GOBACKONECELL);
             swapTwoCells(currentPos, posOfOneCellBehind);
