@@ -221,6 +221,9 @@ void addSeason()
     TVShow *show = findShow(showName);
     if (show != NULL)
     {
+        printf("Enter the name of the show:\n");
+        char *SeasonName = getString();
+        
         // check if seasons array exsists
         if (show->seasons == NULL)
         {
