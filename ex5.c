@@ -74,14 +74,24 @@ void printShow();
 void printArray();
 
 // custom
+
+//locate
 Pos findShowPostion(TVShow *show);
+Season *doesItExsistSeason(TVShow *show, char *name);
+
+//insert
 void insertShow(TVShow *show, Pos posBefore);
 void insertSeaon(TVShow *show, Season *season, int numberOfTheSeason);
 
 Pos getCellNewPos(Pos currentPos, int move);
+
+//shiftCells
 void shiftCellsRightFrom(Pos *lastPos);
 void swapTwoCells(Pos cell1, Pos cell2);
 void shiftCellsLeftFrom(Pos *lastPos);
+
+//clean buffer
+void clearBuffer();
 
 void addMenu()
 {
