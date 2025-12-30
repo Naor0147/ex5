@@ -239,7 +239,8 @@ void addSeason()
     }
     else
     {
-        printf("Show already exists.\n");
+        printf("Show not found.\n");
+        free(showName);
         return;
     }
 }
