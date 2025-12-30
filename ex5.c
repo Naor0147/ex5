@@ -231,9 +231,9 @@ void addSeason()
         scanf("%d",&numberOfTheSeason);
 
         Season *newSeason=(Season *)malloc(sizeof(Season));
-        *newSeason=(Season){seasonName,numberOfTheSeason,NULL};
+        *newSeason=(Season){seasonName,NULL,NULL};
 
-        insertSeaon(show,newSeason);
+        insertSeaon(show,newSeason,numberOfTheSeason);
 
         return;
     }
@@ -245,7 +245,7 @@ void addSeason()
     }
 }
 
-void insertSeaon(TVShow *show,Season *season){
+void insertSeaon(TVShow *show,Season *season,int numberOfTheSeason){
     if (show->seasons == NULL)
     {
         show->seasons=season;
