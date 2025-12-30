@@ -225,7 +225,7 @@ void addSeason()
         if (show->seasons == NULL)
         {
             Season *firstSeaon=(Season *)malloc(sizeof(Season));
-            firstSeaon=(Season*){showName,NULL,NULL};
+            *firstSeaon=(Season){showName,NULL,NULL};
             show->seasons=firstSeaon;
         }
 
