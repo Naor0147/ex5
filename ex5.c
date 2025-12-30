@@ -232,13 +232,8 @@ void addSeason()
 
         Season *newSeason=(Season *)malloc(sizeof(Season));
         *newSeason=(Season){seasonName,numberOfTheSeason,NULL};
-        // check if seasons array exsists
-        if (show->seasons == NULL)
-        {
-            show->seasons=newSeason;
-            return;
-        }
 
+        insertSeaon(show,newSeason);
 
         return;
     }
