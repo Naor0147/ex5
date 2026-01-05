@@ -11,7 +11,7 @@
 #define GOBACKONECELL -1
 #define GOTONEXTCELL 1
 #define INVALIDPOSTION -1
-#define EPISODELENGTHARRAYSIZE 9//
+#define EPISODELENGTHARRAYSIZE 9
 
 typedef struct Episode
 {
@@ -720,7 +720,7 @@ char *getEpisodelength(){
     return;
 }
 
-int isValidInput(char theChar,int index,int maxValue)
+int getTwoDigetNumber(char* theChar,int index,int maxValue)
 {
 
     
