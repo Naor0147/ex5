@@ -369,7 +369,7 @@ void addEpisode()
             free(episodeName);
             return;
         }
-
+        printf("Enter the length (xx:xx:xx):\n");
         //char *episodeLength=getEpisodelength();
 
         // need to get number of seaon
@@ -713,7 +713,24 @@ void clearBuffer()
 
 char *getEpisodelength(){
     char* string=getString();
-    
+    char first
    
     return;
+}
+
+int isValidInput(char theChar,int index,int maxValue)
+{
+    if ((index+1)%3==0)
+    {
+        if (theChar==':')
+        {
+            return 1;
+        }
+        return 0;
+    }
+
+
+
+    
+
 }
