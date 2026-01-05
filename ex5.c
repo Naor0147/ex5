@@ -310,12 +310,12 @@ Season *doesItExsistSeason(TVShow *show, char *name)
     return NULL;
 }
 
-int compareText(char *text1, char *text2)
-{
-}
+
 
 void addEpisode()
 {
+
+    
 }
 
 void insertEpisode(Season *season, Episode *newEpisode, int index)
