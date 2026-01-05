@@ -8,10 +8,20 @@
 #include <string.h>
 
 /// custom
-#define GOBACKONECELL -1
-#define GOTONEXTCELL 1
-#define INVALIDPOSTION -1
-#define EPISODELENGTHARRAYSIZE 9
+#define GO_BACK_ONE_CELL -1
+#define GO_TO_NEXT_CELL 1
+#define INVALID_POSTION -1
+#define EPISODE_LENGTH_ARRAY_SIZE 9
+
+
+//length
+#define ASCII_ZERO '0'
+#define ASCII_NINE '9'
+#define ASCII_SIX '6'
+#define FREQUENCY_OF_COLONIC_APPEARANCE 3
+#define POSITION_MINUTE_DIGIT_ARRAY 3
+#define POSITION_MINUTE_SECONDS_ARRAY 6
+
 
 typedef struct Episode
 {
@@ -582,7 +592,7 @@ Pos findShowPostion(TVShow *show)
             }
         }
     }
-    return (Pos){INVALIDPOSTION, INVALIDPOSTION};
+    return (Pos){INVALID_POSTION, INVALID_POSTION};
 }
 
 /// need to change
@@ -614,7 +624,7 @@ void shiftCellsRightFrom(Pos *lastPos)
 
             // cells we switch
             currentPos = (Pos){i, j};
-            posOfOneCellBehind = getCellNewPos(currentPos, GOBACKONECELL);
+            posOfOneCellBehind = getCellNewPos(currentPos, GO_BACK_ONE_CELL);
             swapTwoCells(currentPos, posOfOneCellBehind);
         }
     }
@@ -631,7 +641,7 @@ void shiftCellsLeftFrom(Pos *lastPos)
                 continue;
             }
             currentPos = (Pos){i, j};
-            posOfOneCellBehind = getCellNewPos(currentPos, GOTONEXTCELL);
+            posOfOneCellBehind = getCellNewPos(currentPos, GO_TO_NEXT_CELL);
             swapTwoCells(currentPos, posOfOneCellBehind);
         }
     }
@@ -644,14 +654,14 @@ Pos getCellNewPos(Pos currentPos, int move)
     // Prevent Division by Zero
     if (dbSize <= 0)
     {
-        return (Pos){INVALIDPOSTION, INVALIDPOSTION};
+        return (Pos){INVALID_POSTION, INVALID_POSTION};
     }
 
     // Validate Input Position
     if (currentPos.row < 0 || currentPos.row >= dbSize ||
         currentPos.column < 0 || currentPos.column >= dbSize)
     {
-        return (Pos){INVALIDPOSTION, INVALIDPOSTION};
+        return (Pos){INVALID_POSTION, INVALID_POSTION};
     }
 
     // Convert the 2d array to 1d array
@@ -668,7 +678,7 @@ Pos getCellNewPos(Pos currentPos, int move)
 
     if (newLineIndex >= (dbSize * dbSize))
     {
-        return (Pos){INVALIDPOSTION, INVALIDPOSTION};
+        return (Pos){INVALID_POSTION, INVALID_POSTION};
     }
 
     // 3. Convert back to 2D array
@@ -682,7 +692,7 @@ Pos getCellNewPos(Pos currentPos, int move)
 void swapTwoCells(Pos cell1, Pos cell2)
 {
     // Validate Input Positions
-    if (cell1.row == INVALIDPOSTION || cell2.row == INVALIDPOSTION)
+    if (cell1.row == INVALID_POSTION || cell2.row == INVALID_POSTION)
     {
         return;
     }
@@ -715,26 +725,56 @@ void clearBuffer()
 char *getEpisodelength(){
 
     char* string=getString();
-
-   
-    return;
-}
-
-int getTwoDigetNumber(char* theChar,int index,int maxValue)
-{
-
-    
-    if ((index+1)%3==0)
+    if (strlen(string)!=EPISODE_LENGTH_ARRAY_SIZE)
     {
-        if (theChar==':')
-        {
-            return 1;
-        }
         return 0;
     }
-
-
-
+    for (int i = 0; i < EPISODE_LENGTH_ARRAY_SIZE-1; i++)
+    {
+        if ((i+1)%FREQUENCY_OF_COLONIC_APPEARANCE==0)
+        {
+            if (!iscolon(string[i]))
+            {
+                free(string);
+                return 0;
+            }
+            
+        }
+        else{
+            if (!isDigit(string[i]))
+                {
+                    free(string);
+                    return 0;
+                }
+        }
+        
+    }
+    if (isValidTimeChar(string[POSITION_MINUTE_DIGIT_ARRAY])||isValidTimeChar(string[POSITION_MINUTE_SECONDS_ARRAY]))
+    {
+        free(string);
+        return 0;
+    }
     
+    return string;
 
+   
+}
+
+int isValidTimeChar(char c){
+    return (c >= ASCII_ZERO && c <= ASCII_SIX);
+
+}
+
+int isDigit(char c)
+{
+    return (c >= ASCII_ZERO && c <= ASCII_NINE);
+}
+
+int isDigit(char c)
+{
+    return (c >= ASCII_ZERO && c <= ASCII_NINE);
+}
+int iscolon(char c)
+{
+    return (c == ':');
 }
