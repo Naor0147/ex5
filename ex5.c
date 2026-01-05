@@ -712,14 +712,17 @@ void clearBuffer()
 }
 
 char *getEpisodelength(){
+    
     char* string=getString();
-    char first
+
    
     return;
 }
 
 int isValidInput(char theChar,int index,int maxValue)
 {
+
+    
     if ((index+1)%3==0)
     {
         if (theChar==':')
