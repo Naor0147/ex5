@@ -90,6 +90,12 @@ void shiftCellsRightFrom(Pos *lastPos);
 void swapTwoCells(Pos cell1, Pos cell2);
 void shiftCellsLeftFrom(Pos *lastPos);
 
+
+//episode Helpers
+char *getEpisodelength();
+void insertEpisode(Season *season, Episode *newEpisode, int index);
+
+
 // clean buffer
 void clearBuffer();
 
@@ -364,7 +370,7 @@ void addEpisode()
             return;
         }
 
-        char *episodeLength=getEpisodelength();
+        //char *episodeLength=getEpisodelength();
 
         // need to get number of seaon
         printf("Enter the position:\n");
@@ -706,5 +712,5 @@ void clearBuffer()
 }
 
 char *getEpisodelength(){
-    
+    return;
 }
