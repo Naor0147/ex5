@@ -291,7 +291,7 @@ void insertSeaon(TVShow *show, Season *newSeason, int index)
 
     return;
 }
-// 0 if doesn't exsists 1 if exsists
+// return the season if exsistes 
 Season *doesItExsistSeason(TVShow *show, char *name)
 {
     Season *temp = show->seasons;
@@ -310,6 +310,28 @@ Season *doesItExsistSeason(TVShow *show, char *name)
     return NULL;
 }
 
+// return the episode if exsistes 
+
+Episode *doesItExsistEpisode(Season *season ,char *name)
+{
+    Episode *temp = season->episodes;
+    if (temp == NULL)
+    {
+        return NULL;
+    }
+    while (temp != NULL)
+    {
+        if (strcmp(temp->name, name) == 0)
+        {
+            return temp;
+        }
+        temp = temp->next;
+    }
+    return NULL;
+}
+
+
+
 
 
 void addEpisode()
@@ -323,13 +345,26 @@ void addEpisode()
         char *seasonName = getString();
         // need to check if the seaon already exsists
         Season *seasonTemp=doesItExsistSeason(show, seasonName);
-        if (doesItExsistSeason == NULL)
+        if (seasonTemp == NULL)
         {
             printf("Season not found.\n");
             free(showName);
             free(seasonName);
             return;
         }
+
+        printf("Enter the name of the episode:\n");
+        char *episodeName = getString();
+        if (doesItExsistEpisode(seasonTemp,episodeName))//episode with the same names exsisest
+        {
+            printf("Episode already exists.\n");
+            free(showName);
+            free(seasonName);
+            free(episodeName);
+            return;
+        }
+        
+        
 
         // need to get number of seaon
         printf("Enter the position:\n");
