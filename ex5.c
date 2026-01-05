@@ -364,7 +364,7 @@ void addEpisode()
             return;
         }
 
-        
+        char *episodeLength=getEpisodelength();
 
         // need to get number of seaon
         printf("Enter the position:\n");
@@ -703,4 +703,8 @@ void clearBuffer()
             return;
         }
     }
+}
+
+char *getEpisodelength(){
+
 }
