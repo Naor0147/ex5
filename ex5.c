@@ -11,6 +11,7 @@
 #define GOBACKONECELL -1
 #define GOTONEXTCELL 1
 #define INVALIDPOSTION -1
+#define EPISODELENGTHARRAYSIZE 9//
 
 typedef struct Episode
 {
@@ -712,7 +713,7 @@ void clearBuffer()
 }
 
 char *getEpisodelength(){
-    
+
     char* string=getString();
 
    
