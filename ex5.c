@@ -342,7 +342,7 @@ void addEpisode()
         Season *newSeason = (Season *)malloc(sizeof(Season));
         *newSeason = (Season){seasonName, NULL, NULL};
 
-        insertSeaon(show, newSeason, numberOfTheSeason);
+        insertEpisode(show, newSeason, numberOfTheSeason);
 
         return;
     }
