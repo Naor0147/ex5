@@ -314,8 +314,45 @@ Season *doesItExsistSeason(TVShow *show, char *name)
 
 void addEpisode()
 {
+    printf("Enter the name of the show:\n");
+    char *showName = getString();
+    TVShow *show = findShow(showName);
+    if (show != NULL)
+    {
+        printf("Enter the name of the season:\n");
+        char *seasonName = getString();
+        // need to check if the seaon already exsists
+        if (doesItExsistSeason(show, seasonName) != NULL)
+        {
+            printf("Season already exists.\n");
+            free(showName);
+            free(seasonName);
+            return;
+        }
 
-    
+        // need to get number of seaon
+        printf("Enter the position:\n");
+        int numberOfTheSeason;
+        scanf("%d", &numberOfTheSeason);
+
+        // if left over char left in the buffer
+        clearBuffer();
+
+        Season *newSeason = (Season *)malloc(sizeof(Season));
+        *newSeason = (Season){seasonName, NULL, NULL};
+
+        insertSeaon(show, newSeason, numberOfTheSeason);
+
+        return;
+    }
+    else
+    {
+        printf("Show not found.\n");
+        free(showName);
+        return;
+    }
+
+
 }
 
 void insertEpisode(Season *season, Episode *newEpisode, int index)
