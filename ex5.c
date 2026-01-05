@@ -712,6 +712,8 @@ void clearBuffer()
 }
 
 char *getEpisodelength(){
+    char* string=getString();
     
+   
     return;
 }
