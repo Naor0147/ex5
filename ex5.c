@@ -11,17 +11,15 @@
 #define GO_BACK_ONE_CELL -1
 #define GO_TO_NEXT_CELL 1
 #define INVALID_POSTION -1
-#define EPISODE_LENGTH_ARRAY_SIZE 9
+#define EPISODE_LENGTH_ARRAY_SIZE 8
 
-
-//length
+// length
 #define ASCII_ZERO '0'
 #define ASCII_NINE '9'
-#define ASCII_SIX '6'
+#define ASCII_FIVE '5'
 #define FREQUENCY_OF_COLONIC_APPEARANCE 3
 #define POSITION_MINUTE_DIGIT_ARRAY 3
 #define POSITION_MINUTE_SECONDS_ARRAY 6
-
 
 typedef struct Episode
 {
@@ -87,8 +85,9 @@ void printArray();
 // custom
 
 // locate
-Pos findShowPostion(TVShow *show);
+Pos findShowNewPostion(TVShow *show);
 Season *doesItExsistSeason(TVShow *show, char *name);
+Pos getShowCoordinates(TVShow *show);
 
 // insert
 void insertShow(TVShow *show, Pos posBefore);
@@ -101,11 +100,28 @@ void shiftCellsRightFrom(Pos *lastPos);
 void swapTwoCells(Pos cell1, Pos cell2);
 void shiftCellsLeftFrom(Pos *lastPos);
 
-
-//episode Helpers
-char *getEpisodelength();
+// episode Helpers
+char *getEpisodeLength();
+int getEpisodelengthHelper();
 void insertEpisode(Season *season, Episode *newEpisode, int index);
+int isDigit(char c);
+int isDigit(char c);
+int iscolon(char c);
+int isValidTimeChar(char c);
 
+// remove
+
+// episode
+void removeEpisode(Episode *theEpisode, Season *seasonOfTheEpisode);
+void removeSeasonAllEpsiodes(Season *seasonOfTheEpisode);
+
+// Season
+void removeSeasonEpisodes(Episode *tempEpisode, Season *seasonOfTheEpisode);
+void removeSeasonHelper(Season *seasonToRemove, TVShow *TVShowOfTheSeason);
+
+// Tvshow
+void removeTVShowSeason(TVShow *TVShowOfTheSeason);
+void removeTVShowSeasonHelper(Season *tempSeason, TVShow *TVShowOfTheSeason);
 
 // clean buffer
 void clearBuffer();
@@ -117,7 +133,7 @@ void addMenu()
     printf("1. Add a TV show\n");
     printf("2. Add a season\n");
     printf("3. Add an episode\n");
-    scanf("%d", &choice);
+    scanf(" %d", &choice);
     getchar();
     switch (choice)
     {
@@ -140,7 +156,7 @@ void deleteMenu()
     printf("1. Delete a TV show\n");
     printf("2. Delete a season\n");
     printf("3. Delete an episode\n");
-    scanf("%d", &choice);
+    scanf(" %d", &choice);
     getchar();
     switch (choice)
     {
@@ -163,7 +179,7 @@ void printMenuSub()
     printf("1. Print a TV show\n");
     printf("2. Print an episode\n");
     printf("3. Print the array\n");
-    scanf("%d", &choice);
+    scanf(" %d", &choice);
     getchar();
     switch (choice)
     {
@@ -194,7 +210,7 @@ int main()
     do
     {
         mainMenu();
-        scanf("%d", &choice);
+        scanf(" %d", &choice);
         getchar();
         switch (choice)
         {
@@ -208,7 +224,7 @@ int main()
             printMenuSub();
             break;
         case 4:
-            // freeAll();
+            freeAll();
             break;
         }
     } while (choice != 4);
@@ -238,7 +254,7 @@ void addShow()
     newShow->name = showName;
     newShow->seasons = NULL;
 
-    Pos posToInsert = findShowPostion(newShow);
+    Pos posToInsert = findShowNewPostion(newShow);
     insertShow(newShow, posToInsert);
 }
 
@@ -272,7 +288,7 @@ void addSeason()
         *newSeason = (Season){seasonName, NULL, NULL};
 
         insertSeaon(show, newSeason, numberOfTheSeason);
-
+        free(showName);
         return;
     }
     else
@@ -308,7 +324,7 @@ void insertSeaon(TVShow *show, Season *newSeason, int index)
 
     return;
 }
-// return the season if exsistes 
+// return the season if exsistes
 Season *doesItExsistSeason(TVShow *show, char *name)
 {
     Season *temp = show->seasons;
@@ -327,9 +343,9 @@ Season *doesItExsistSeason(TVShow *show, char *name)
     return NULL;
 }
 
-// return the episode if exsistes 
+// return the episode if exsistes
 
-Episode *doesItExsistEpisode(Season *season ,char *name)
+Episode *doesItExsistEpisode(Season *season, char *name)
 {
     Episode *temp = season->episodes;
     if (temp == NULL)
@@ -347,10 +363,6 @@ Episode *doesItExsistEpisode(Season *season ,char *name)
     return NULL;
 }
 
-
-
-
-
 void addEpisode()
 {
     printf("Enter the name of the show:\n");
@@ -363,7 +375,7 @@ void addEpisode()
         printf("Enter the name of the season:\n");
         char *seasonName = getString();
         // need to check if the seaon already exsists
-        Season *seasonOfTheEpisode=doesItExsistSeason(show, seasonName);
+        Season *seasonOfTheEpisode = doesItExsistSeason(show, seasonName);
         free(seasonName);
 
         if (seasonOfTheEpisode == NULL)
@@ -374,14 +386,14 @@ void addEpisode()
 
         printf("Enter the name of the episode:\n");
         char *episodeName = getString();
-        if (doesItExsistEpisode(seasonOfTheEpisode,episodeName))//episode with the same names exsisest
+        if (doesItExsistEpisode(seasonOfTheEpisode, episodeName)) // episode with the same names exsisest
         {
             printf("Episode already exists.\n");
             free(episodeName);
             return;
         }
         printf("Enter the length (xx:xx:xx):\n");
-        //char *episodeLength=getEpisodelength();
+        char *episodeLength = getEpisodeLength();
 
         // need to get number of seaon
         printf("Enter the position:\n");
@@ -392,7 +404,7 @@ void addEpisode()
         clearBuffer();
 
         Episode *newEpisode = (Episode *)malloc(sizeof(Episode));
-        *newEpisode = (Episode){episodeName, NULL, NULL};
+        *newEpisode = (Episode){episodeName, episodeLength, NULL};
 
         insertEpisode(seasonOfTheEpisode, newEpisode, numberOfTheSeason);
 
@@ -401,11 +413,8 @@ void addEpisode()
     else
     {
         printf("Show not found.\n");
-        free(showName);
         return;
     }
-
-
 }
 
 void insertEpisode(Season *season, Episode *newEpisode, int index)
@@ -436,13 +445,177 @@ void insertEpisode(Season *season, Episode *newEpisode, int index)
 
 void deleteShow()
 {
+    printf("Enter the name of the show:\n");
+    char *showName = getString();
+    TVShow *show = findShow(showName);
+
+    free(showName);
+    freeShow(show);
+    shrinkDB();
+}
+// deleteShow
+
+void freeShow(TVShow *show)
+{
+
+    if (show != NULL)
+    {
+        removeTVShowSeason(show);
+        Pos pos = getShowCoordinates(show);
+        database[pos.row][pos.column] = NULL;
+        free(show->name);
+        free(show);
+        shiftCellsLeftFrom(&pos);
+
+        return;
+    }
+    else
+    {
+        printf("Show not found.\n");
+        return;
+    }
 }
 void deleteSeason()
 {
+    printf("Enter the name of the show:\n");
+    char *showName = getString();
+    TVShow *show = findShow(showName);
+    free(showName);
+
+    if (show != NULL)
+    {
+        printf("Enter the name of the season:\n");
+        char *seasonName = getString();
+        // need to check if the seaon already exsists
+        Season *seasonToRemove = doesItExsistSeason(show, seasonName);
+        free(seasonName); // frees the season Name
+
+        if (seasonToRemove == NULL)
+        {
+            printf("Season not found.\n");
+            return;
+        }
+        removeSeasonHelper(seasonToRemove, show);
+        return;
+    }
+    else
+    {
+        printf("Show not found.\n");
+        return;
+    }
 }
 void deleteEpisode()
 {
+
+    printf("Enter the name of the show:\n");
+    char *showName = getString();
+    TVShow *show = findShow(showName);
+    free(showName);
+
+    if (show != NULL)
+    {
+        printf("Enter the name of the season:\n");
+        char *seasonName = getString();
+        // need to check if the seaon already exsists
+        Season *seasonOfTheEpisode = doesItExsistSeason(show, seasonName);
+        free(seasonName); // frees the season Name
+
+        if (seasonOfTheEpisode == NULL)
+        {
+            printf("Season not found.\n");
+            return;
+        }
+
+        printf("Enter the name of the episode:\n");
+        char *episodeName = getString();
+        Episode *theEpisdode = doesItExsistEpisode(seasonOfTheEpisode, episodeName);
+        free(episodeName);       // frees the episode name
+        if (theEpisdode == NULL) // episode with the same names exsisest
+        {
+            printf("Episode not found.\n");
+            return;
+        }
+        removeEpisode(theEpisdode, seasonOfTheEpisode);
+        return;
+    }
+    else
+    {
+        printf("Show not found.\n");
+        return;
+    }
 }
+
+void removeEpisode(Episode *theEpisode, Season *seasonOfTheEpisode)
+{
+
+    if (seasonOfTheEpisode == NULL || theEpisode == NULL || seasonOfTheEpisode->episodes == NULL)
+    {
+        return; //  safety check
+    }
+    Episode *temp = seasonOfTheEpisode->episodes;
+    if (temp == theEpisode)
+    {
+        seasonOfTheEpisode->episodes = temp->next;
+        freeEpisode(theEpisode);
+        return;
+    }
+
+    while (temp->next != NULL && temp->next != theEpisode)
+    {
+        temp = temp->next;
+    }
+
+    // If we found it
+    if (temp->next == theEpisode)
+    {
+        temp->next = theEpisode->next;
+        freeEpisode(theEpisode);
+    }
+}
+
+void freeEpisode(Episode *e)
+{
+
+    if (e == NULL)
+    {
+        return;
+    }
+
+    // Free the strings inside the struct
+    if (e->name != NULL)
+    {
+        free(e->name);
+    }
+    if (e->length != NULL)
+    {
+        free(e->length);
+    }
+
+    // free the struct itself
+    free(e);
+}
+
+void freeSeason(Season *s)
+{
+    if (s == NULL)
+    {
+        return;
+    }
+
+    // Free the strings inside the struct
+    if (s->name != NULL)
+    {
+        free(s->name);
+    }
+    if (s->episodes != NULL)
+    {
+        removeSeasonAllEpsiodes(s);
+    }
+
+    // free the struct itself
+    free(s);
+}
+
 void printEpisode()
 {
 }
@@ -455,20 +628,30 @@ void printShow()
     TVShow *show = findShow(showName);
     if (show != NULL)
     {
-        printf("Name: %s\nSeasons:\n",showName);
+        printf("Name: %s\nSeasons:\n", showName);
         Season *tempSeason = show->seasons;
         int index = 0;
         while (tempSeason != NULL)
         {
             printf("\tSeason %d: %s\n", index, tempSeason->name);
             index++;
+            Episode *tempEpisode = tempSeason->episodes;
+            int indexEpsiode = 0;
+            while (tempEpisode != NULL)
+            {
+                printf("\t\tEpisode %d: %s (%s)\n", indexEpsiode, tempEpisode->name, tempEpisode->length);
+                indexEpsiode++;
+                tempEpisode = tempEpisode->next;
+            }
+
             tempSeason = tempSeason->next;
         }
     }
-    else{
+    else
+    {
         printf("Show not found.\n");
     }
-    
+
     free(showName);
     return;
 }
@@ -563,19 +746,17 @@ void expandDB()
                 if (database[i][j] == NULL)
                 {
                     Pos curentPos = (Pos){i, j};
-                    shiftCellsLeftFrom(&curentPos); // have problem
+                    shiftCellsLeftFrom(&curentPos);
                 }
             }
         }
     }
 
-    // need to realocate the old array
-
     return;
 }
 
 // return the position of the show in the database where the new show should be inserted
-Pos findShowPostion(TVShow *show)
+Pos findShowNewPostion(TVShow *show)
 {
     for (int i = 0; i < dbSize; i++)
     {
@@ -647,7 +828,43 @@ void shiftCellsLeftFrom(Pos *lastPos)
     }
 }
 
-void freeAll();
+void freeAll()
+{
+
+    if (database == NULL)
+        return;
+
+    for (int i = 0; i < dbSize; i++)
+    {
+        if (database[i] != NULL)
+        {
+            for (int j = 0; j < dbSize; j++)
+            {
+                // Free the show directly
+                TVShow *currentShow = database[i][j];
+                if (currentShow != NULL)
+                {
+                    // Free seasons and episodes
+                    removeTVShowSeason(currentShow);
+
+                    // Free name
+                    if (currentShow->name != NULL)
+                    {
+                        free(currentShow->name);
+                    }
+
+                    // Free the struct
+                    free(currentShow);
+                }
+            }
+            // Free the row array
+            free(database[i]);
+        }
+    }
+
+    // Free the main array
+    free(database);
+}
 
 Pos getCellNewPos(Pos currentPos, int move)
 {
@@ -722,47 +939,57 @@ void clearBuffer()
     }
 }
 
-char *getEpisodelength(){
+char *getEpisodeLength()
+{
+    char *myString = getString();
+    while (!getEpisodelengthHelper(myString))
+    {
+        printf("Invalid length, enter again:\n");
+        myString = getString();
+    }
+    return myString;
+}
 
-    char* string=getString();
-    if (strlen(string)!=EPISODE_LENGTH_ARRAY_SIZE)
+int getEpisodelengthHelper(char *string)
+{
+
+    int len = strlen(string);
+    if (len != EPISODE_LENGTH_ARRAY_SIZE)
     {
         return 0;
     }
-    for (int i = 0; i < EPISODE_LENGTH_ARRAY_SIZE-1; i++)
+    for (int i = 0; i < EPISODE_LENGTH_ARRAY_SIZE; i++)
     {
-        if ((i+1)%FREQUENCY_OF_COLONIC_APPEARANCE==0)
+        if ((i + 1) % FREQUENCY_OF_COLONIC_APPEARANCE == 0)
         {
             if (!iscolon(string[i]))
             {
                 free(string);
                 return 0;
             }
-            
         }
-        else{
+        else
+        {
             if (!isDigit(string[i]))
-                {
-                    free(string);
-                    return 0;
-                }
+            {
+                free(string);
+                return 0;
+            }
         }
-        
     }
-    if (isValidTimeChar(string[POSITION_MINUTE_DIGIT_ARRAY])||isValidTimeChar(string[POSITION_MINUTE_SECONDS_ARRAY]))
+    if (!isValidTimeChar(string[POSITION_MINUTE_DIGIT_ARRAY]) ||
+        !isValidTimeChar(string[POSITION_MINUTE_SECONDS_ARRAY]))
     {
         free(string);
         return 0;
     }
-    
-    return string;
 
-   
+    return 1;
 }
 
-int isValidTimeChar(char c){
-    return (c >= ASCII_ZERO && c <= ASCII_SIX);
-
+int isValidTimeChar(char c)
+{
+    return (c >= ASCII_ZERO && c <= ASCII_FIVE);
 }
 
 int isDigit(char c)
@@ -770,11 +997,151 @@ int isDigit(char c)
     return (c >= ASCII_ZERO && c <= ASCII_NINE);
 }
 
-int isDigit(char c)
-{
-    return (c >= ASCII_ZERO && c <= ASCII_NINE);
-}
 int iscolon(char c)
 {
     return (c == ':');
+}
+
+// remove Recuseivly the last Episdode from the end to the start
+void removeSeasonEpisodes(Episode *tempEpisode, Season *seasonOfTheEpisode)
+{
+    if (tempEpisode == NULL)
+    {
+        return;
+    }
+    removeSeasonEpisodes(tempEpisode->next, seasonOfTheEpisode);
+    removeEpisode(tempEpisode, seasonOfTheEpisode);
+}
+
+void removeSeasonHelper(Season *seasonToRemove, TVShow *TVShowOfTheSeason)
+{
+    removeSeasonAllEpsiodes(seasonToRemove);
+    if (seasonToRemove == NULL)
+    {
+        return; //  safety check
+    }
+    Season *temp = TVShowOfTheSeason->seasons;
+    if (temp == seasonToRemove)
+    {
+        TVShowOfTheSeason->seasons = temp->next;
+        freeSeason(seasonToRemove);
+        return;
+    }
+
+    while (temp->next != NULL && temp->next != seasonToRemove)
+    {
+        temp = temp->next;
+    }
+
+    // If we found it
+    if (temp->next == seasonToRemove)
+    {
+        temp->next = seasonToRemove->next;
+    }
+    freeSeason(seasonToRemove);
+}
+
+void removeSeasonAllEpsiodes(Season *seasonOfTheEpisode)
+{
+    if (seasonOfTheEpisode == NULL)
+    {
+        return; //  safety check
+    }
+    Episode *tempEpisode = seasonOfTheEpisode->episodes;
+
+    removeSeasonEpisodes(tempEpisode, seasonOfTheEpisode);
+}
+
+void removeTVShowSeason(TVShow *TVShowOfTheSeason)
+{
+    Season *tempSeason = TVShowOfTheSeason->seasons;
+    removeTVShowSeasonHelper(tempSeason, TVShowOfTheSeason);
+}
+
+void removeTVShowSeasonHelper(Season *tempSeason, TVShow *TVShowOfTheSeason)
+{
+    if (tempSeason == NULL)
+    {
+        return;
+    }
+    removeTVShowSeasonHelper(tempSeason->next, TVShowOfTheSeason);
+    removeSeasonHelper(tempSeason, TVShowOfTheSeason);
+}
+
+// get the Show Pos
+Pos getShowCoordinates(TVShow *show)
+{
+    for (int i = 0; i < dbSize; i++)
+    {
+        for (int j = 0; j < dbSize; j++)
+        {
+            if (database[i][j] == show)
+            {
+                return (Pos){i, j};
+            }
+        }
+    }
+    return (Pos){INVALID_POSTION, INVALID_POSTION};
+}
+
+int countShows()
+{
+    int count = 0;
+    for (int i = 0; i < dbSize; i++)
+    {
+        for (int j = 0; j < dbSize; j++)
+        {
+            // Only count if not null
+            if (database[i][j] != NULL)
+            {
+                count++;
+            }
+        }
+    }
+    return count;
+}
+void shrinkDB()
+{
+    int count = countShows();
+
+    // Check if we can shrink
+    if (count <= (dbSize - 1) * (dbSize - 1))
+    {
+
+        // We only need to save items from the last column of the rows that will remain.
+        for (int i = 0; i < dbSize - 1; i++)
+        {
+            // The item in the last column
+            TVShow *showToMove = database[i][dbSize - 1];
+
+            if (showToMove != NULL)
+            {
+                // remove it from the current spot so it doesnt get duplicated
+                database[i][dbSize - 1] = NULL;
+
+                // move to the next row
+                Pos targetPos = {i + 1, 0};
+
+                // Shift everything from that position onwards to the right
+                shiftCellsRightFrom(&targetPos);
+
+                // Place the show in the newly opened spot
+                database[targetPos.row][targetPos.column] = showToMove;
+            }
+        }
+
+        dbSize--;
+
+        // Shrink every row
+        for (int i = 0; i < dbSize; i++)
+        {
+            database[i] = realloc(database[i], dbSize * sizeof(TVShow *));
+        }
+
+        // Free the last row
+        free(database[dbSize]);
+
+        // Shrink the main array
+        database = realloc(database, dbSize * sizeof(TVShow **));
+    }
 }

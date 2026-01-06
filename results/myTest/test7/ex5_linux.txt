@@ -1,0 +1,725 @@
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Add a TV show
+2. Add a season
+3. Add an episode
+Enter the name of the show:
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Add a TV show
+2. Add a season
+3. Add an episode
+Enter the name of the show:
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Add a TV show
+2. Add a season
+3. Add an episode
+Enter the name of the show:
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Print a TV show
+2. Print an episode
+3. Print the array
+[Breaking Bad] [Friends] 
+[The Office] [NULL] 
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Print a TV show
+2. Print an episode
+3. Print the array
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Print a TV show
+2. Print an episode
+3. Print the array
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Print a TV show
+2. Print an episode
+3. Print the array
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Print a TV show
+2. Print an episode
+3. Print the array
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Print a TV show
+2. Print an episode
+3. Print the array
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Print a TV show
+2. Print an episode
+3. Print the array
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Print a TV show
+2. Print an episode
+3. Print the array
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Print a TV show
+2. Print an episode
+3. Print the array
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Print a TV show
+2. Print an episode
+3. Print the array
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Print a TV show
+2. Print an episode
+3. Print the array
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Print a TV show
+2. Print an episode
+3. Print the array
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Print a TV show
+2. Print an episode
+3. Print the array
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Print a TV show
+2. Print an episode
+3. Print the array
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Print a TV show
+2. Print an episode
+3. Print the array
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Print a TV show
+2. Print an episode
+3. Print the array
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Print a TV show
+2. Print an episode
+3. Print the array
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Print a TV show
+2. Print an episode
+3. Print the array
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Print a TV show
+2. Print an episode
+3. Print the array
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Print a TV show
+2. Print an episode
+3. Print the array
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Print a TV show
+2. Print an episode
+3. Print the array
+Enter the name of the show:
+Show not found.
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Print a TV show
+2. Print an episode
+3. Print the array
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Print a TV show
+2. Print an episode
+3. Print the array
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Print a TV show
+2. Print an episode
+3. Print the array
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Print a TV show
+2. Print an episode
+3. Print the array
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Print a TV show
+2. Print an episode
+3. Print the array
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Print a TV show
+2. Print an episode
+3. Print the array
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Print a TV show
+2. Print an episode
+3. Print the array
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Print a TV show
+2. Print an episode
+3. Print the array
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Print a TV show
+2. Print an episode
+3. Print the array
+Enter the name of the show:
+Show not found.
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Add a TV show
+2. Add a season
+3. Add an episode
+Enter the name of the show:
+Enter the name of the season:
+Season not found.
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Add a TV show
+2. Add a season
+3. Add an episode
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Add a TV show
+2. Add a season
+3. Add an episode
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Add a TV show
+2. Add a season
+3. Add an episode
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Print a TV show
+2. Print an episode
+3. Print the array
+Enter the name of the show:
+Name: Breaking Bad
+Seasons:
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Print a TV show
+2. Print an episode
+3. Print the array
+[Breaking Bad] [Friends] 
+[The Office] [NULL] 
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Print a TV show
+2. Print an episode
+3. Print the array
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Print a TV show
+2. Print an episode
+3. Print the array
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Print a TV show
+2. Print an episode
+3. Print the array
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Print a TV show
+2. Print an episode
+3. Print the array
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Print a TV show
+2. Print an episode
+3. Print the array
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Print a TV show
+2. Print an episode
+3. Print the array
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Print a TV show
+2. Print an episode
+3. Print the array
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Print a TV show
+2. Print an episode
+3. Print the array
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Print a TV show
+2. Print an episode
+3. Print the array
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Print a TV show
+2. Print an episode
+3. Print the array
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Print a TV show
+2. Print an episode
+3. Print the array
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Print a TV show
+2. Print an episode
+3. Print the array
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Print a TV show
+2. Print an episode
+3. Print the array
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Print a TV show
+2. Print an episode
+3. Print the array
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Print a TV show
+2. Print an episode
+3. Print the array
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Print a TV show
+2. Print an episode
+3. Print the array
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Print a TV show
+2. Print an episode
+3. Print the array
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Print a TV show
+2. Print an episode
+3. Print the array
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Print a TV show
+2. Print an episode
+3. Print the array
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Print a TV show
+2. Print an episode
+3. Print the array
+Enter the name of the show:
+Show not found.
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Print a TV show
+2. Print an episode
+3. Print the array
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Print a TV show
+2. Print an episode
+3. Print the array
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Print a TV show
+2. Print an episode
+3. Print the array
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Print a TV show
+2. Print an episode
+3. Print the array
+[Breaking Bad] [Friends] 
+[The Office] [NULL] 
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Print a TV show
+2. Print an episode
+3. Print the array
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Print a TV show
+2. Print an episode
+3. Print the array
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Print a TV show
+2. Print an episode
+3. Print the array
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Print a TV show
+2. Print an episode
+3. Print the array
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Print a TV show
+2. Print an episode
+3. Print the array
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Print a TV show
+2. Print an episode
+3. Print the array
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Print a TV show
+2. Print an episode
+3. Print the array
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Print a TV show
+2. Print an episode
+3. Print the array
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Print a TV show
+2. Print an episode
+3. Print the array
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Print a TV show
+2. Print an episode
+3. Print the array
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Print a TV show
+2. Print an episode
+3. Print the array
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Print a TV show
+2. Print an episode
+3. Print the array
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Print a TV show
+2. Print an episode
+3. Print the array
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
