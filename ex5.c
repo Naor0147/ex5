@@ -451,8 +451,13 @@ void deleteShow()
     printf("Enter the name of the show:\n");
     char *showName = getString();
     TVShow *show = findShow(showName);
-
     free(showName);
+
+    if (show == NULL)
+    {
+        printf("Show not found.\n");
+        return;
+    }
 
     freeShow(show);
     shrinkDB();
@@ -462,23 +467,25 @@ void deleteShow()
 void freeShow(TVShow *show)
 {
 
-    if (show != NULL)
+    if (show == NULL)
     {
-        removeTVShowSeason(show);
-        Pos pos = getShowCoordinates(show);
-        database[pos.row][pos.column] = NULL;
-        free(show->name);
-        free(show);
-        shiftCellsLeftFrom(&pos);
+        return;
+    }
 
-        return;
-    }
-    else
+    removeTVShowSeason(show);
+    Pos pos = getShowCoordinates(show);
+
+    database[pos.row][pos.column] = NULL;
+
+    if (show->name != NULL)
     {
-        printf("Show not found.\n");
-        return;
+        free(show->name);
     }
+    free(show);
+
+    shiftCellsLeftFrom(&pos);
 }
+
 void deleteSeason()
 {
     printf("Enter the name of the show:\n");
