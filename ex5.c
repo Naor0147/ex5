@@ -466,23 +466,20 @@ void deleteShow()
 
 void freeShow(TVShow *show)
 {
-
+    //of the show doesnt exsits
     if (show == NULL)
     {
         return;
     }
 
     removeTVShowSeason(show);
-    Pos pos = getShowCoordinates(show);
-
+    Pos pos = getShowCoordinates(show);//get sho pos
     database[pos.row][pos.column] = NULL;
-
     if (show->name != NULL)
     {
         free(show->name);
     }
     free(show);
-
     shiftCellsLeftFrom(&pos);
 }
 
