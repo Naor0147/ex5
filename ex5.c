@@ -453,6 +453,7 @@ void deleteShow()
     TVShow *show = findShow(showName);
 
     free(showName);
+
     freeShow(show);
     shrinkDB();
 }
@@ -649,7 +650,7 @@ void printEpisode()
             printf("Episode not found.\n");
             return;
         }
-        printf("Name: %s\nLength: %s", theEpisdode->name, theEpisdode->length);
+        printf("Name: %s\nLength: %s\n", theEpisdode->name, theEpisdode->length);
 
         return;
     }
@@ -1146,6 +1147,7 @@ void shrinkDB()
     int count = countShows();
 
     // Check if we can shrink
+
     if (count <= (dbSize - 1) * (dbSize - 1))
     {
 

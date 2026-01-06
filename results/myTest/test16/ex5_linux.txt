@@ -1,0 +1,215 @@
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Add a TV show
+2. Add a season
+3. Add an episode
+Enter the name of the show:
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Add a TV show
+2. Add a season
+3. Add an episode
+Enter the name of the show:
+Enter the name of the season:
+Enter the position:
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Add a TV show
+2. Add a season
+3. Add an episode
+Enter the name of the show:
+Enter the name of the season:
+Enter the name of the episode:
+Enter the length (xx:xx:xx):
+Enter the position:
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Print a TV show
+2. Print an episode
+3. Print the array
+Enter the name of the show:
+Enter the name of the season:
+Enter the name of the episode:
+Name: Boom!
+Length: 00:32:59
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Print a TV show
+2. Print an episode
+3. Print the array
+[Chainsaw Man] 
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Print a TV show
+2. Print an episode
+3. Print the array
+Enter the name of the show:
+Name: Chainsaw Man
+Seasons:
+	Season 0: Reze arc
+		Episode 0: Boom! (00:32:59)
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Add a TV show
+2. Add a season
+3. Add an episode
+Enter the name of the show:
+Enter the name of the season:
+Enter the position:
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Print a TV show
+2. Print an episode
+3. Print the array
+Enter the name of the show:
+Name: Chainsaw Man
+Seasons:
+	Season 0: The third horse man
+	Season 1: Reze arc
+		Episode 0: Boom! (00:32:59)
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Add a TV show
+2. Add a season
+3. Add an episode
+Enter the name of the show:
+Show not found.
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Add a TV show
+2. Add a season
+3. Add an episode
+Enter the name of the show:
+Enter the name of the season:
+Enter the name of the episode:
+Enter the length (xx:xx:xx):
+Invalid length, enter again:
+Invalid length, enter again:
+Invalid length, enter again:
+Enter the position:
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Print a TV show
+2. Print an episode
+3. Print the array
+Enter the name of the show:
+Name: Chainsaw Man
+Seasons:
+	Season 0: The third horse man
+	Season 1: Reze arc
+		Episode 0: Boom! (00:32:59)
+		Episode 1: Bam! (99:59:59)
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Print a TV show
+2. Print an episode
+3. Print the array
+Enter the name of the show:
+Enter the name of the season:
+Enter the name of the episode:
+Name: Bam!
+Length: 99:59:59
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Print a TV show
+2. Print an episode
+3. Print the array
+[Chainsaw Man] 
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Add a TV show
+2. Add a season
+3. Add an episode
+Enter the name of the show:
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Print a TV show
+2. Print an episode
+3. Print the array
+[Chainsaw Man] [Jujutsu Kaisen] 
+[NULL] [NULL] 
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Delete a TV show
+2. Delete a season
+3. Delete an episode
+Enter the name of the show:
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
+Choose an option:
+1. Print a TV show
+2. Print an episode
+3. Print the array
+[Jujutsu Kaisen] 
+Choose an option:
+1. Add
+2. Delete
+3. Print
+4. Exit
