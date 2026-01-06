@@ -1,6 +1,7 @@
 /***********
  ID:329218416
  NAME:Naor Biton
+ ASSIGNMENT:ex5
 ***********/
 
 #include <stdio.h>
@@ -12,6 +13,7 @@
 #define GO_TO_NEXT_CELL 1
 #define INVALID_POSTION -1
 #define EPISODE_LENGTH_ARRAY_SIZE 8
+#define NOTCHOOSENYET 0
 
 // length
 #define ASCII_ZERO '0'
@@ -128,12 +130,12 @@ void clearBuffer();
 
 void addMenu()
 {
-    int choice;
+    int choice = NOTCHOOSENYET;
     printf("Choose an option:\n");
     printf("1. Add a TV show\n");
     printf("2. Add a season\n");
     printf("3. Add an episode\n");
-    scanf(" %d", &choice);
+    scanf("%d", &choice);
     getchar();
     switch (choice)
     {
@@ -151,12 +153,12 @@ void addMenu()
 
 void deleteMenu()
 {
-    int choice;
+    int choice = NOTCHOOSENYET;
     printf("Choose an option:\n");
     printf("1. Delete a TV show\n");
     printf("2. Delete a season\n");
     printf("3. Delete an episode\n");
-    scanf(" %d", &choice);
+    scanf("%d", &choice);
     getchar();
     switch (choice)
     {
@@ -174,12 +176,12 @@ void deleteMenu()
 
 void printMenuSub()
 {
-    int choice;
+    int choice = NOTCHOOSENYET;
     printf("Choose an option:\n");
     printf("1. Print a TV show\n");
     printf("2. Print an episode\n");
     printf("3. Print the array\n");
-    scanf(" %d", &choice);
+    scanf("%d", &choice);
     getchar();
     switch (choice)
     {
@@ -206,11 +208,12 @@ void mainMenu()
 
 int main()
 {
-    int choice;
+    int choice = NOTCHOOSENYET;
+
     do
     {
         mainMenu();
-        scanf(" %d", &choice);
+        scanf("%d", &choice);
         getchar();
         switch (choice)
         {
@@ -618,6 +621,43 @@ void freeSeason(Season *s)
 
 void printEpisode()
 {
+    printf("Enter the name of the show:\n");
+    char *showName = getString();
+    TVShow *show = findShow(showName);
+    free(showName); // free the memory
+
+    if (show != NULL)
+    {
+        printf("Enter the name of the season:\n");
+        char *seasonName = getString();
+        // need to check if the seaon already exsists
+        Season *seasonOfTheEpisode = doesItExsistSeason(show, seasonName);
+        free(seasonName); // frees the season Name
+
+        if (seasonOfTheEpisode == NULL)
+        {
+            printf("Season not found.\n");
+            return;
+        }
+
+        printf("Enter the name of the episode:\n");
+        char *episodeName = getString();
+        Episode *theEpisdode = doesItExsistEpisode(seasonOfTheEpisode, episodeName);
+        free(episodeName);       // frees the episode name
+        if (theEpisdode == NULL) // episode with the same names exsisest
+        {
+            printf("Episode not found.\n");
+            return;
+        }
+        printf("Name: %s\nLength: %s", theEpisdode->name, theEpisdode->length);
+
+        return;
+    }
+    else
+    {
+        printf("Show not found.\n");
+        return;
+    }
 }
 
 void printShow()
@@ -956,6 +996,7 @@ int getEpisodelengthHelper(char *string)
     int len = strlen(string);
     if (len != EPISODE_LENGTH_ARRAY_SIZE)
     {
+        free(string); // if the string is not i the right size
         return 0;
     }
     for (int i = 0; i < EPISODE_LENGTH_ARRAY_SIZE; i++)
@@ -1142,6 +1183,14 @@ void shrinkDB()
         free(database[dbSize]);
 
         // Shrink the main array
-        database = realloc(database, dbSize * sizeof(TVShow **));
+        if (dbSize == 0)
+        {
+            free(database);
+            database = NULL;
+        }
+        else
+        {
+            database = realloc(database, dbSize * sizeof(TVShow **));
+        }
     }
 }
